@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Prueba" Class="PruebaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=localhost\SQLEXPRESS;Initial Catalog=Prueba;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PruebaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="Reserva.d" Member="d">
+    <Type Name="d">
+      <Column Name="codigo" Type="System.Guid" DbType="UniqueIdentifier" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Persona" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Vuelo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="habilitado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Pasajero_d" Member="Pasajero" ThisKey="Persona" OtherKey="Nombre" Type="Pasajero" IsForeignKey="true" />
+      <Association Name="Vuelo_d" Member="Vuelo1" ThisKey="Vuelo" OtherKey="NumeroVuelo" Type="Vuelo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Aeropuerto" Member="Aeropuerto">
+    <Type Name="Aeropuerto">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Ciudad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Pais" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="habilitado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Aeropuerto_Vuelo" Member="Vuelo" ThisKey="Ciudad" OtherKey="Ciudad_Origen" Type="Vuelo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Vuelo" Member="Vuelo">
+    <Type Name="Vuelo">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ciudad_Origen" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Ciudad_Destino" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NumeroVuelo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Precio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Moneda" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="habilitado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Vuelo_d" Member="d" ThisKey="NumeroVuelo" OtherKey="Vuelo" Type="d" />
+      <Association Name="Vuelo_Vuelo" Member="Vuelo2" ThisKey="id" OtherKey="id" Type="Vuelo" Cardinality="One" />
+      <Association Name="Vuelo_Vuelo" Member="Vuelo1" ThisKey="id" OtherKey="id" Type="Vuelo" IsForeignKey="true" />
+      <Association Name="Aeropuerto_Vuelo" Member="Aeropuerto" ThisKey="Ciudad_Origen" OtherKey="Ciudad" Type="Aeropuerto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pasajero" Member="Pasajero">
+    <Type Name="Pasajero">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Habilitado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Pasajero_d" Member="d" ThisKey="Nombre" OtherKey="Persona" Type="d" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Contacto" Member="Contacto">
+    <Type Name="Contacto">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="correo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="mensaje" Type="System.String" DbType="VarChar(450) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

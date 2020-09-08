@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/General.css" rel="stylesheet" />
+
+<link href="~/Content/datatables.css" rel="stylesheet" />
+<section class="row justify-content-center mt-5">
+    <header class="row bg-dark justify-content-center mt-3 mb-3">
+        <h2 class="text-capitalize text-white">Consulta tu reserva</h2>
+    </header>
+</section>
+
+<section class="row justify-content-around">
+
+         <div class="panel panel-default">
+            
+            <div class="panel-body">
+                <div class="form-inline">
+                    <input id="txtcodigo" type="text"  />
+                    <button id="btnBuscar" class="btn btn-success">Consultar</button>
+                </div>
+            </div>
+        </div>
+   
+    
+
+</section>
+<section class="row justify-content-around">
+
+    <div id="tabla" class="table table-striped">
+
+    </div>
+
+
+</section>
+
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script src="~/scripts/Reserva.js"></script>

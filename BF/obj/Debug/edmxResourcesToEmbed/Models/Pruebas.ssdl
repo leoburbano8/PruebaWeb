@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PruebaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Aeropuerto">
+    <Key>
+      <PropertyRef Name="CodOACI" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodOACI" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="CodIATA" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Pais" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Prueba.dbo.Vuelos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Vuelos">
+    <Key>
+      <PropertyRef Name="idvuelo" />
+      <PropertyRef Name="codvuelo" />
+      <PropertyRef Name="CodOACI_Origen" />
+      <PropertyRef Name="CodOACI_Destino" />
+      <PropertyRef Name="Fecha" />
+    </Key>
+    <Property Name="idvuelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="codvuelo" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="CodOACI_Origen" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="CodOACI_Destino" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
+    <Property Name="Hora" Type="time" Precision="0" />
+  </EntityType>
+  <Association Name="FK_Vuelos_Aeropuerto_Destino">
+    <End Role="Aeropuerto" Type="Self.Aeropuerto" Multiplicity="1" />
+    <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aeropuerto">
+        <PropertyRef Name="CodOACI" />
+      </Principal>
+      <Dependent Role="Vuelos">
+        <PropertyRef Name="CodOACI_Destino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vuelos_Aeropuerto_Origen">
+    <End Role="Aeropuerto" Type="Self.Aeropuerto" Multiplicity="1" />
+    <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aeropuerto">
+        <PropertyRef Name="CodOACI" />
+      </Principal>
+      <Dependent Role="Vuelos">
+        <PropertyRef Name="CodOACI_Origen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PruebaModelStoreContainer">
+    <EntitySet Name="Aeropuerto" EntityType="Self.Aeropuerto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vuelos" EntityType="Self.Vuelos" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Vuelos].[idvuelo] AS [idvuelo], 
+    [Vuelos].[codvuelo] AS [codvuelo], 
+    [Vuelos].[CodOACI_Origen] AS [CodOACI_Origen], 
+    [Vuelos].[CodOACI_Destino] AS [CodOACI_Destino], 
+    [Vuelos].[Fecha] AS [Fecha], 
+    [Vuelos].[Hora] AS [Hora]
+    FROM [dbo].[Vuelos] AS [Vuelos]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Vuelos_Aeropuerto_Destino" Association="Self.FK_Vuelos_Aeropuerto_Destino">
+      <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+      <End Role="Vuelos" EntitySet="Vuelos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vuelos_Aeropuerto_Origen" Association="Self.FK_Vuelos_Aeropuerto_Origen">
+      <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+      <End Role="Vuelos" EntitySet="Vuelos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

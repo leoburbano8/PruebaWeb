@@ -1,0 +1,162 @@
+﻿@model BF.Models.d
+@{
+    ViewBag.Title = "Index";
+  
+}
+
+
+<link href="~/Content/General.css" rel="stylesheet" />
+
+<section class="row justify-content-center mt-5">
+    <div class="col-md-9 mt-3">
+        <div class="carousel slide" id="carrusel" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100 d-block" src="~/Imagenes/bogota.PNG" alt="Primer elemento">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="display-5 text-white font-weight-bold">Bogota desde $230.000</h1>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100 d-block" src="~/Imagenes/medellin.jpg" alt="Segundo elemento">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="display-5 text-white font-weight-bold">Medellin desde $180.000</h1>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100 d-block" src="~/Imagenes/sanandres.PNG" alt="Tercer elemento">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="display-5 text-dark font-weight-bold">San Andres desde $560.000</h1>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100 d-block" src="~/Imagenes/cartagena.PNG" alt="Cuarto elemento">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="display-5 text-white font-weight-bold">Cartagena desde $250.000</h1>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carrusel" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#carrusel" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="sr-only">Posterior</span>
+            </a>
+            <ol class="carousel-indicators">
+                <li data-target="#carrusel" data-slide-to="0" class="active"></li>
+                <li data-target="#carrusel" data-slide-to="1"></li>
+                <li data-target="#carrusel" data-slide-to="2"></li>
+                <li data-target="#carrusel" data-slide-to="3"></li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<header class="row bg-dark justify-content-center mt-3 mb-3">
+    <h2 class="text-capitalize text-white">Reserva tu vuelo</h2>
+</header>
+
+<!-- CARD -->
+<section class="row justify-content-around bg">
+    <div class="col-sm-3 al">
+       <p class="text-dark text-center"><strong>Seleccione Origen</strong> </p>
+        <select id="cboOrigen" class="form-control">
+            <option value="1">Origen</option>
+            <option value="Bogotá">Bogotá</option>
+            <option value="Medellin">Medellin</option>
+            <option value="Cartagena">Cartagena</option>
+            <option value="San Andres">San Andres</option>
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <p class="text-dark text-center"><strong>Seleccione Destino</strong> </p>
+        <select id="cboDestino" class="form-control">
+            <option value="1">Destino</option>
+            <option value="Bogotá">Bogotá</option>
+            <option value="Medellin">Medellin</option>
+            <option value="Cartagena">Cartagena</option>
+            <option value="San Andres">San Andres</option>
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <p class="text-dark text-center"><strong>Fecha Ida</strong> </p>
+        <input class="form-control" type="date" value="2020-09-08" id="dateida">
+    </div>
+    
+    <div class="col-lg-5 text-center">
+        <button class="btn btn-primary" id="btnBuscar">Buscar Vuelos</button>
+    </div>
+
+</section>
+
+<div id="myModal" class="modal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="lblTitulo" class="modal-title">Realizar Reserva</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Nuevo", "Vuelo", FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.LabelFor(d => d.Persona)
+                                @Html.TextBoxFor(d => d.Persona, "", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(d => d.Persona, null, new { @class = "red" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(d => d.Vuelo)<br />
+                                @Html.TextAreaFor(d => d.Vuelo, new { @class = "form-control"})
+                                @Html.ValidationMessageFor(d => d.Vuelo, null, new { @class = "red" })
+                            </div>
+                            <br />
+                            <div class="text-right">
+                                <input value="Enviar" class="btn btn-primary" type="submit" />
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                
+
+                <button id="btnCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<section class="row justify-content-around">
+
+    <div id="tabla" class="table table-striped">
+
+    </div>
+
+
+</section>
+
+<script>
+        $(function () {
+            //Habilita los tooltips
+            $('[data-toggle="tooltip"]').tooltip({
+                container: 'body'
+            });
+        });
+</script>
+<!-- Optional JavaScript -->
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script src="~/scripts/Vuelo.js"></script>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="~/scripts/Inicio.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

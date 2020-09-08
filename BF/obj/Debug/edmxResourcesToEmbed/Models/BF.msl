@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PruebaModelStoreContainer" CdmEntityContainer="PruebaEntities">
+    <EntitySetMapping Name="Aeropuerto">
+      <EntityTypeMapping TypeName="PruebaModel.Aeropuerto">
+        <MappingFragment StoreEntitySet="Aeropuerto">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pasajeros">
+      <EntityTypeMapping TypeName="PruebaModel.Pasajeros">
+        <MappingFragment StoreEntitySet="Pasajeros">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Ps1Nombre" ColumnName="Ps1Nombre" />
+          <ScalarProperty Name="Ps1Apellido" ColumnName="Ps1Apellido" />
+          <ScalarProperty Name="Ps2Nombre" ColumnName="Ps2Nombre" />
+          <ScalarProperty Name="Ps2Apellido" ColumnName="Ps2Apellido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vuelo">
+      <EntityTypeMapping TypeName="PruebaModel.Vuelo">
+        <MappingFragment StoreEntitySet="Vuelo">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Ciudad_Origen" ColumnName="Ciudad_Origen" />
+          <ScalarProperty Name="Ciudad_Destino" ColumnName="Ciudad_Destino" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="NumeroVuelo" ColumnName="NumeroVuelo" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d">
+      <EntityTypeMapping TypeName="PruebaModel.d">
+        <MappingFragment StoreEntitySet="d">
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="Persona" ColumnName="Persona" />
+          <ScalarProperty Name="Vuelo" ColumnName="Vuelo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

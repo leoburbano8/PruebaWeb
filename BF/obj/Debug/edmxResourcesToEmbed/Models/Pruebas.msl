@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PruebaModelStoreContainer" CdmEntityContainer="PruebaEntities">
+    <EntitySetMapping Name="Aeropuerto">
+      <EntityTypeMapping TypeName="PruebaModel.Aeropuerto">
+        <MappingFragment StoreEntitySet="Aeropuerto">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="CodOACI" ColumnName="CodOACI" />
+          <ScalarProperty Name="CodIATA" ColumnName="CodIATA" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vuelos">
+      <EntityTypeMapping TypeName="PruebaModel.Vuelos">
+        <MappingFragment StoreEntitySet="Vuelos">
+          <ScalarProperty Name="idvuelo" ColumnName="idvuelo" />
+          <ScalarProperty Name="codvuelo" ColumnName="codvuelo" />
+          <ScalarProperty Name="CodOACI_Origen" ColumnName="CodOACI_Origen" />
+          <ScalarProperty Name="CodOACI_Destino" ColumnName="CodOACI_Destino" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Hora" ColumnName="Hora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

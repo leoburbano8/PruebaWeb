@@ -1,0 +1,54 @@
+﻿* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin:0%;
+    padding:0%;
+}
+
+html {
+    height:100%;
+}
+
+body {
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+
+.hheader {
+	position: fixed;
+}
+
+.navbar {
+background-color: #01579b;
+color: white;
+}
+
+
+.footer {
+ 
+  left: 0;
+  height:40px;
+  bottom: 0;
+  width: 100%;
+  color:white;
+  text-align: center;
+  margin-top:auto
+}
+
+
+div.al{
+    flex: 20% 50% 25%;;
+}
+
+section.bg {
+    width: 100%;
+    padding: 0 7%;
+    margin: 8px;
+    max-width: 100%;
+   
+    background-image: url('../Imagenes/banner.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 30vh;
+}

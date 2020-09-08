@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PruebaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Aeropuerto">
+    <Key>
+      <PropertyRef Name="CodOACI" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodOACI" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CodIATA" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Vuelos" Relationship="Self.FK_Vuelos_Aeropuerto_Destino" FromRole="Aeropuerto" ToRole="Vuelos" />
+    <NavigationProperty Name="Vuelos1" Relationship="Self.FK_Vuelos_Aeropuerto_Origen" FromRole="Aeropuerto" ToRole="Vuelos" />
+  </EntityType>
+  <EntityType Name="Vuelos">
+    <Key>
+      <PropertyRef Name="idvuelo" />
+      <PropertyRef Name="codvuelo" />
+      <PropertyRef Name="CodOACI_Origen" />
+      <PropertyRef Name="CodOACI_Destino" />
+      <PropertyRef Name="Fecha" />
+    </Key>
+    <Property Name="idvuelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codvuelo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CodOACI_Origen" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CodOACI_Destino" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Hora" Type="Time" Precision="0" />
+    <NavigationProperty Name="Aeropuerto" Relationship="Self.FK_Vuelos_Aeropuerto_Destino" FromRole="Vuelos" ToRole="Aeropuerto" />
+    <NavigationProperty Name="Aeropuerto1" Relationship="Self.FK_Vuelos_Aeropuerto_Origen" FromRole="Vuelos" ToRole="Aeropuerto" />
+  </EntityType>
+  <Association Name="FK_Vuelos_Aeropuerto_Destino">
+    <End Role="Aeropuerto" Type="Self.Aeropuerto" Multiplicity="1" />
+    <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aeropuerto">
+        <PropertyRef Name="CodOACI" />
+      </Principal>
+      <Dependent Role="Vuelos">
+        <PropertyRef Name="CodOACI_Destino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vuelos_Aeropuerto_Origen">
+    <End Role="Aeropuerto" Type="Self.Aeropuerto" Multiplicity="1" />
+    <End Role="Vuelos" Type="Self.Vuelos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aeropuerto">
+        <PropertyRef Name="CodOACI" />
+      </Principal>
+      <Dependent Role="Vuelos">
+        <PropertyRef Name="CodOACI_Origen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PruebaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Aeropuerto" EntityType="Self.Aeropuerto" />
+    <EntitySet Name="Vuelos" EntityType="Self.Vuelos" />
+    <AssociationSet Name="FK_Vuelos_Aeropuerto_Destino" Association="Self.FK_Vuelos_Aeropuerto_Destino">
+      <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+      <End Role="Vuelos" EntitySet="Vuelos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vuelos_Aeropuerto_Origen" Association="Self.FK_Vuelos_Aeropuerto_Origen">
+      <End Role="Aeropuerto" EntitySet="Aeropuerto" />
+      <End Role="Vuelos" EntitySet="Vuelos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
