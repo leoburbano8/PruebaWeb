@@ -1,8 +1,5 @@
-Vista: Vuelos Pagina Principal, 
-Dificultad:	
-* Consulta por ciudad origen y ciudad destino, pero no por fecha
-* Al seleccionar el vuelo, aparece el modal donde ingreso datos que se guardan en la base de datos(Reserva.d)
-* No me carga el modal con los datos del vuelo
+Demo Reserva Vuelos asp.net MVC
+Vista: Vuelos Pagina Principal
 
 Vista: Reserva
 * Consultar por codigo:
